@@ -1,0 +1,39 @@
+Questions?
+
+1.what is event-loop?
+2.what is asynchornous programming?
+3.Execution of asynchornous programs?
+
+
+Fact: Javascript is a single threaded language,but how we are able to excecute asynchornous code in Js need to be investigated...
+
+In Javascript environment we have the following main components,
+
+1.Event-loop
+2.Libuv
+3.call-stack
+
+1.Call-stack: is where out code is acutally excecuted,all the program is excecuted in call stack
+2.libuv is c++ library that acutally interacts with kernal to excecute asynchornous tasks
+3.Event-loop: its is like a manager of asynchornous code excecution
+.It takes control only when call stack is empty.Then it executes every callbacks in a specific order.
+
+
+Order of Execution in event loop:
+
+1. callbacks in microtask queue(1st : nextick, 2nd: promises)
+2.timer queue(between every timer queue it goes into microtask everytime)
+3.Io queue(same here also it goes into microtask queue after every call back)
+4.check queue(same here)
+5.close queue(same here)
+6.checks microtask queue again at the end of iteration
+
+
+
+ event loop archietectue
+
+    timer queue--->Io queue----->check queue------>close queue----->timer queue
+        |              |            |                 |               |
+        |              |            |                 |               |
+        |              |            |                 |               |
+    <-------------------microtask(nextick,promise)------------------------------>
